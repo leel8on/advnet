@@ -1,0 +1,12 @@
+nth run of script:
+Calculate Sample Mean:
+	W(n) = time;
+	Wbar(n) = sum(W) / n;
+Calculate Variance:
+	Sn = var(W);
+Calculate Confidence Interval Width
+	x = 1.96; #z score for 95% CI
+	Wwidth(n) = (2*x*Sn)/sqrt(n);
+Check if width is less than .05
+	if Wwidth(n) <= Wbar(n)*.05:
+		STOPRUNNINGSIMFORTHISPARAMETER();
