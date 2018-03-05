@@ -79,7 +79,7 @@ def runstats(urlstr, version, lst, sm_lst):
     a.setopt(a.WRITEDATA, f)
 
     # getting a baseline
-    for i in range(100):
+    for i in range(2):
         a = pycurl.Curl()
         a.setopt(a.URL, urlstr)
         if version == 1:
@@ -107,9 +107,9 @@ def runstats(urlstr, version, lst, sm_lst):
     	total_time.append(l.time_total)
 
     conf = (2 * numpy.var(total_time) * 1.645) / (math.sqrt(len(total_time)));
-    print(str(conf) + " > " + str(sm_lst[-1].time_total * .1))
+    print(str(conf) + " > " + str(numpy.float(sm_lst[-1].time_total * .1)))
 
-    while(conf > (sm_lst[-1].time_total * .1)):
+    while(conf > numpy.float64(sm_lst[-1].time_total * .1)):
     	
     	a = pycurl.Curl()
         a.setopt(a.URL, urlstr)
@@ -129,7 +129,7 @@ def runstats(urlstr, version, lst, sm_lst):
         sm_lst.append(SampleMean(lst));
         total_time.append(lst[-1].time_total);
         conf = (2 * numpy.var(total_time) * 1.645) / (math.sqrt(len(total_time)));
-        print(str(conf) + " > " + str(sm_lst[-1].time_total * .1))
+        print(str(conf) + " > " + str(numpy.float64(sm_lst[-1].time_total * .1)))
 
     f.close()
 
