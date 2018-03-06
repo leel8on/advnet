@@ -131,7 +131,7 @@ def runstats(urlstr, version, lst, sm_lst, n):
     #print(str(conf) + " > " + str(numpy.float(sm_lst[-1].time_total * .1)))
 
     #while(numpy.float64(sm_lst[-1].time_total * .1) <= conf):
-    while (conf > .001):
+    while (conf > .0015):
     	#print(str(conf) + " > " + str(.0015))
     	a = pycurl.Curl()
         a.setopt(a.URL, urlstr)
