@@ -3,6 +3,7 @@
 import pycurl
 import numpy
 import math
+import matplotlib.pyplot as plt
 
 # Object lists for text only site
 text1 = []
@@ -79,7 +80,7 @@ def runstats(urlstr, version, lst, sm_lst):
     a.setopt(a.WRITEDATA, f)
 
     # getting a baseline
-    for i in range(2):
+    for i in range(100):
         a = pycurl.Curl()
         a.setopt(a.URL, urlstr)
         if version == 1:
@@ -106,11 +107,20 @@ def runstats(urlstr, version, lst, sm_lst):
     for l in lst:
     	total_time.append(l.time_total)
 
-    conf = (2 * numpy.var(total_time) * 1.645) / (math.sqrt(len(total_time)));
-    print(str(conf) + " > " + str(numpy.float(sm_lst[-1].time_total * .1)))
+    # for l in total_time:
+    #  	print(l)
 
-    while(conf > numpy.float64(sm_lst[-1].time_total * .1)):
-    	
+    vari = numpy.var(total_time);
+    print(vari)
+
+    z_val = 1.645
+
+    conf = (2 * math.sqrt(vari) * z_val) / (math.sqrt(len(total_time)));
+    #print(str(conf) + " > " + str(numpy.float(sm_lst[-1].time_total * .1)))
+
+    #while(numpy.float64(sm_lst[-1].time_total * .1) <= conf):
+    while (conf > .001):
+    	print(str(conf) + " > " + str(.001))
     	a = pycurl.Curl()
         a.setopt(a.URL, urlstr)
         if version == 1:
@@ -128,8 +138,8 @@ def runstats(urlstr, version, lst, sm_lst):
 
         sm_lst.append(SampleMean(lst));
         total_time.append(lst[-1].time_total);
-        conf = (2 * numpy.var(total_time) * 1.645) / (math.sqrt(len(total_time)));
-        print(str(conf) + " > " + str(numpy.float64(sm_lst[-1].time_total * .1)))
+        conf = (2 * math.sqrt(numpy.var(total_time)) * 1.645) / (math.sqrt(len(total_time)));
+       # print(str(conf) + " > " + str(numpy.float64(sm_lst[-1].time_total * .1)))
 
     f.close()
 
@@ -146,18 +156,18 @@ if __name__ == "__main__":
 
     # Text only sites
     runstats(texturl, 1, text1, text1_sm)
-    #runstats(texturltls, 1, text1tls, )
-    #runstats(texturltls, 2, text2)
+    runstats(texturltls, 1, text1tls, text1tls_sm )
+    runstats(texturltls, 2, text2, text2_sm )
 
     # Single source image sites
-    #runstats(imgurl, 1, img1)
-    #runstats(imgurltls, 1, img1tls)
-    #runstats(imgurltls, 2, img2)
+    runstats(imgurl, 1, img1, img1_sm)
+    runstats(imgurltls, 1, img1tls, img1_sm)
+    runstats(imgurltls, 2, img2, img1_sm)
     
     # Multi source image sites
-    #runstats(mimgurl, 1, multi1)
-    #runstats(mimgurltls, 1, multi1tls)
-    #runstats(mimgurltls, 2, multi2)
+    runstats(mimgurl, 1, multi1, multi1_sm)
+    runstats(mimgurltls, 1, multi1tls, multi1tls_sm)
+    runstats(mimgurltls, 2, multi2, multi2_sm)
  
 
     print("Sample Mean: " + str(SampleMean(text1)));
