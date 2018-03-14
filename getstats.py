@@ -48,18 +48,18 @@ multi2_n = 0
 
 # Stats Class 
 class Stats:
-    def __init__(self, numc, tc, tp, tt):
-        self.num_connects = numc
+    def __init__(self, tc, tapc, ts, tt):
         self.time_connect = tc
-        self.time_pretransfer = tp
+        self.time_appconnect = tapc
+        self.time_starttransfer = ts
         self.time_total = tt
 
     def __str__(self):
     	print("Stats ID:" + str(id(self)))
-    	return ' #_conn: %d\n t_conn: %f\n t_prtf: %f\n t_totl: %f' % (
-    		self.num_connects, 
+    	return ' \n t_conn: %f\n t_appconn: %f\n t_sttf: %f\n t_totl: %f' % (
     		self.time_connect, 
-    		self.time_pretransfer, 
+                self.time_appconnect, 
+                self.time_starttransfer,
     		self.time_total);
 
 # Sample Mean 
@@ -102,9 +102,9 @@ def runstats(urlstr, version, lst, sm_lst, n):
         a.setopt(a.WRITEDATA, f)
         a.perform()
         lst.append(Stats(
-            a.getinfo(a.NUM_CONNECTS),
             a.getinfo(a.CONNECT_TIME),
-            a.getinfo(a.PRETRANSFER_TIME),
+            a.getinfo(a.APPCONNECT_TIME),
+            a.getinfo(a.STARTTRANSFER_TIME),
             a.getinfo(a.TOTAL_TIME)))
 
         sm_lst.append(SampleMean(lst));
@@ -142,9 +142,9 @@ def runstats(urlstr, version, lst, sm_lst, n):
         a.setopt(a.WRITEDATA, f)
         a.perform()
         lst.append(Stats(
-            a.getinfo(a.NUM_CONNECTS),
             a.getinfo(a.CONNECT_TIME),
-            a.getinfo(a.PRETRANSFER_TIME),
+            a.getinfo(a.APPCONNECT_TIME),
+            a.getinfo(a.STARTTRANSFER_TIME),
             a.getinfo(a.TOTAL_TIME)))
         a.close()
 
