@@ -58,26 +58,26 @@ class Stats:
     	print("Stats ID:" + str(id(self)))
     	return ' \n t_conn: %f\n t_appconn: %f\n t_sttf: %f\n t_totl: %f' % (
     		self.time_connect, 
-                self.time_appconnect, 
-                self.time_starttransfer,
+            self.time_appconnect, 
+            self.time_starttransfer,
     		self.time_total);
 
 # Sample Mean 
 def SampleMean(ls):
-	conn_sum = 0.0
-	time_sum = 0.0
-	prtm_sum = 0.0
-	totm_sum = 0.0
+	tc = 0.0
+	tapc = 0.0
+	ts = 0.0
+	tt = 0.0
 	for l in ls:
-		conn_sum += l.num_connects 
-		time_sum += l.time_connect
-		prtm_sum += l.time_pretransfer
-		totm_sum += l.time_total
+		tc += l.time_connect 
+		tapc += l.time_appconnect
+		ts += l.time_starttransfer
+		tt += l.time_total
 
-	return Stats(conn_sum / len(ls), 
-				 time_sum / len(ls), 
-				 prtm_sum / len(ls), 
-				 totm_sum / len(ls))
+	return Stats(tc / len(ls), 
+				 tapc / len(ls), 
+				 ts / len(ls), 
+				 tt / len(ls))
 
 # runstats
 def runstats(urlstr, version, lst, sm_lst, n):
