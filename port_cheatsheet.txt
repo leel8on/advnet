@@ -1,0 +1,44 @@
+HTTP 1.1 and 2 enabled
+
+text
+http://advnet.l8on.org:80/
+https://advnet.l8on.org:443/
+
+Single page image 1
+http://advnet.l8on.org:8080/
+https://advnet.l8on.org:8081/
+
+Multi image from the 1 and 2
+http://advnet.l8on.org:8082/
+https://advnet.l8on.org:8083/
+
+Single page image 2 
+http://advnet.l8on.org:8084/
+https://advnet.l8on.org:8085/
+
+Large
+http://advnet.l8on.org:8088/
+https://advnet.l8on.org:8087/
+
+
+ONLY HTTP 1.1
+
+text
+http://advnet.l8on.org:8090/
+https://advnet.l8on.org:8091/
+
+Single page image 1
+http://advnet.l8on.org:8092/
+https://advnet.l8on.org:8093/
+
+Single page image 2 
+http://advnet.l8on.org:8094/
+https://advnet.l8on.org:8095/
+
+Multi image from the 2 above
+http://advnet.l8on.org:8096/
+https://advnet.l8on.org:8097/
+
+Large page
+http://advnet.l8on.org:8098/
+https://advnet.l8on.org:8099/
